@@ -16,8 +16,8 @@ TagManager:
   - PostProcessing
   - Background
   - Player
-  - 
-  - 
+  - Enemy
+  - Invulnerable
   - 
   - 
   - 
@@ -44,6 +44,6 @@ TagManager:
   - name: Background
     uniqueID: 1325622005
     locked: 0
-  - name: Player
+  - name: Ship
     uniqueID: 3435276269
     locked: 0

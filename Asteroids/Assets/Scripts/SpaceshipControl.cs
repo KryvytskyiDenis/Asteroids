@@ -9,10 +9,8 @@ public class SpaceshipControl : MonoBehaviour {
     public float turnThrust;
     private float thrustInput;
     private float turnInput;
-    public float screenTop;
-    public float screenBottom;
-    public float screenLeft;
-    public float screenRight;
+
+    float shipBoundariesRadius = 0.5f;
 
 	void Update () {
         // Check for input from keyboard
@@ -20,31 +18,42 @@ public class SpaceshipControl : MonoBehaviour {
         turnInput = Input.GetAxis("Horizontal"); // [-1;1]  by horizontal in the project settings: a, d, left, right
 
         // Wrapper
-        Vector2 newPosition = transform.position;
+        Vector2 pos = transform.position;
+        Vector2 newPos = transform.position;
 
-        if (transform.position.y > screenTop)
+        // Do vertical bounds
+        if (pos.y - shipBoundariesRadius > Camera.main.orthographicSize)
         {
-            newPosition.y = screenBottom;
+            newPos.y = -Camera.main.orthographicSize;
         }
-        if (transform.position.y < screenBottom)
+        if (pos.y + shipBoundariesRadius < -Camera.main.orthographicSize)
         {
-            newPosition.y = screenTop;
-        }
-        if (transform.position.x < screenLeft)
-        {
-            newPosition.x = screenRight;
-        }
-        if (transform.position.x > screenRight)
-        {
-            newPosition.x = screenLeft;
+            newPos.y = Camera.main.orthographicSize;
         }
 
-        transform.position = newPosition;
-    }
+        // Calculate the orthographic width based on the screen ration
+        float screenRation = (float) Screen.width / (float) Screen.height;
+        float widthOrtho = Camera.main.orthographicSize * screenRation;
 
-    private void FixedUpdate()
-    {
-        rb.AddRelativeForce(Vector2.up * thrustInput * thrust);
-        rb.AddTorque(-turnInput * turnThrust); // torque for rotation
+        // Do horizontal bounds
+        if (pos.x - shipBoundariesRadius > widthOrtho)
+        {
+            newPos.x = -widthOrtho;
+        }
+        if (pos.x + shipBoundariesRadius < -widthOrtho)
+        {
+            newPos.x = widthOrtho;
+        }
+
+        // Update position
+        transform.position = newPos;
+
+        // Move
+        //Vector3 velocity = new Vector3(0, thrustInput * thrust * Time.deltaTime, 0);
+        //transform.Translate(velocity);
+        rb.AddRelativeForce(Vector2.up * thrustInput * thrust * Time.deltaTime);
+
+        // Torque for rotation
+        rb.AddTorque(-turnInput * turnThrust * Time.deltaTime);
     }
 }
