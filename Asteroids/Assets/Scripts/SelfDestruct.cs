@@ -9,7 +9,7 @@ public class SelfDestruct : MonoBehaviour
     private void Update()
     {
         timer -= Time.deltaTime;
-        Debug.Log("timer:" + timer);
+
         if(timer <= 0)
         {
             Destroy(gameObject);
