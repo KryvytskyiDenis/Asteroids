@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageHandler : MonoBehaviour
 {
+    public GameManager gameManager;
+
     public int health = 1;
 
     public float invulnPeriod = 0;
@@ -11,8 +13,12 @@ public class DamageHandler : MonoBehaviour
     int defaultLayer = 0;
 
     SpriteRenderer spriteRenderer;
+
+
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         defaultLayer = gameObject.layer;
 
         // This only get the rendere on the parnet object.
@@ -24,7 +30,7 @@ public class DamageHandler : MonoBehaviour
 
             if(spriteRenderer == null)
             {
-                Debug.LogError("Object '" + gameObject.name + "' has no sprite rendXZere.");
+                Debug.LogError("Object '" + gameObject.name + "' has no sprite renderer.");
             }
         }
     }
@@ -74,6 +80,16 @@ public class DamageHandler : MonoBehaviour
     }
     void Die()
     {
+        if(gameObject.tag.Equals("Enemy"))
+        {
+            Debug.Log("Enemy destroyed");
+            gameManager.UpdateScore(1);
+        }
+        else if(gameObject.tag.Equals("Player"))
+        {
+            gameManager.GameOver();
+        }
+
         Destroy(gameObject);
     }
 }

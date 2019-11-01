@@ -29,7 +29,7 @@ public class ShipShooting : MonoBehaviour
         if(isPlayer)
         {
             isFire = Input.GetButton("Fire1");
-            Debug.Log(isFire);
+            //Debug.Log(isFire);
         }
 
         if(!isPlayer)
@@ -47,7 +47,6 @@ public class ShipShooting : MonoBehaviour
         
         if (cooldownTimer <= 0 && ((isPlayer && isFire) || (!isPlayer && player != null && Vector3.Distance(transform.position, player.position) < 7)))
         {
-           
             cooldownTimer = fireDelay;
 
             Vector3 offset = transform.rotation * bulletOffset;

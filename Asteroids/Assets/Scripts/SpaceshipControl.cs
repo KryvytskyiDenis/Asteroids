@@ -12,7 +12,7 @@ public class SpaceshipControl : MonoBehaviour {
 
     float shipBoundariesRadius = 0.5f;
 
-	void Update () {
+	void FixedUpdate () {
         // Check for input from keyboard
         thrustInput = Input.GetAxis("Vertical"); // [-1;1] by vertical in the project settings: w, s, up, down 
         turnInput = Input.GetAxis("Horizontal"); // [-1;1]  by horizontal in the project settings: a, d, left, right
@@ -49,9 +49,9 @@ public class SpaceshipControl : MonoBehaviour {
         transform.position = newPos;
 
         // Move
-        //Vector3 velocity = new Vector3(0, thrustInput * thrust * Time.deltaTime, 0);
-        //transform.Translate(velocity);
-        rb.AddRelativeForce(Vector2.up * thrustInput * thrust * Time.deltaTime);
+        Vector3 velocity = new Vector3(0, thrustInput * thrust * Time.deltaTime, 0);
+        transform.Translate(velocity);
+        //rb.AddRelativeForce(Vector2.up * thrustInput * thrust * Time.deltaTime);
 
         // Torque for rotation
         rb.AddTorque(-turnInput * turnThrust * Time.deltaTime);

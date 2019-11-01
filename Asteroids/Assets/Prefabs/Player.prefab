@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 97474224639651267}
-  thrust: 200
-  turnThrust: 200
+  thrust: 5
+  turnThrust: 300
 --- !u!114 &97474224639651277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916f436b53f98bd4493926b4480cfb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 3
   invulnPeriod: 3
 --- !u!114 &97474224639651279
 MonoBehaviour:
@@ -203,4 +203,4 @@ MonoBehaviour:
   bulletOffset: {x: 0, y: 0.5, z: 0}
   bulletPrefab: {fileID: 27822313353607149, guid: 3e6ddd5feb37ec24a985001f684fff1a,
     type: 3}
-  fireDelay: 0.25
+  fireDelay: 0.1

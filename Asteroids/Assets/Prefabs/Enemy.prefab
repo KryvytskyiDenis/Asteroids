@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4414003827758028628}
   m_Layer: 11
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916f436b53f98bd4493926b4480cfb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   health: 1
   invulnPeriod: 0
 --- !u!114 &8336437942057054202
@@ -158,7 +159,7 @@ MonoBehaviour:
   bulletOffset: {x: 0, y: 0.5, z: 0}
   bulletPrefab: {fileID: 27822313353607149, guid: a8b827222113af44b91e784ab6cf449e,
     type: 3}
-  fireDelay: 0.25
+  fireDelay: 1
 --- !u!1 &8336437942777701280
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,8 +226,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -859691027
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 438101e1863ce90438c425ecbb157245, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

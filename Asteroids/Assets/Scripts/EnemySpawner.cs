@@ -11,11 +11,6 @@ public class EnemySpawner : MonoBehaviour
     float enemyRate = 5;
     float nextEnemy = 1;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         nextEnemy -= Time.deltaTime;

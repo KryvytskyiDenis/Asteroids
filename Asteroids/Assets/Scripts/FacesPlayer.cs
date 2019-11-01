@@ -21,13 +21,11 @@ public class FacesPlayer : MonoBehaviour
         }
 
         // At this point, we've either found the player,
-        // or he/she doesn;t exist right now.
-
+        // or he/she doesn't exist right now.
         if (player == null)
             return; // Try again next frame
 
-        // Here we know for sure we have a player. Turn to face it!
-
+        // Here we know for sure we have a player. Turn to face it
         Vector3 dir = player.position - transform.position;
         dir.Normalize();
 
