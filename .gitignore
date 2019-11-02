@@ -10,7 +10,9 @@
 
 Assets/AssetStoreTools*
 Asteroids/Assets/AssetsStock/
+Asteroids/Assets/AssetsStock.meta
 Asteroids/Assets/TextMesh Pro
+Asteroids/Assets/TextMesh Pro.meta
 
 # Visual Studio cache directory
 .vs/
