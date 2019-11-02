@@ -10,24 +10,28 @@ public class EnemySpawner : MonoBehaviour
 
     float enemyRate = 5;
     float nextEnemy = 1;
+    
 
     void Update()
     {
-        nextEnemy -= Time.deltaTime;
-        
-        if(nextEnemy <= 0)
+        if(!GameObject.Find("GameManager").GetComponent<GameManager>().gameOver)
         {
-            nextEnemy = enemyRate;
-            enemyRate *= 0.9f;
-            if (enemyRate < 2)
-                enemyRate = 2;
+            nextEnemy -= Time.deltaTime;
 
-            Vector3 offset = Random.onUnitSphere;
+            if (nextEnemy <= 0)
+            {
+                nextEnemy = enemyRate;
+                enemyRate *= 0.9f;
+                if (enemyRate < 2)
+                    enemyRate = 2;
 
-            offset.z = 0;
-            offset = offset.normalized * spawnDistance;
+                Vector3 offset = Random.onUnitSphere;
 
-            Instantiate(enemyPrefab, transform.position + offset, Quaternion.identity);
+                offset.z = 0;
+                offset = offset.normalized * spawnDistance;
+
+                Instantiate(enemyPrefab, transform.position + offset, Quaternion.identity);
+            }
         }
     }
 }

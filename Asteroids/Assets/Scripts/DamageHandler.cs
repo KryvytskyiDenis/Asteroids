@@ -6,14 +6,13 @@ public class DamageHandler : MonoBehaviour
 {
     public GameManager gameManager;
 
+    SpriteRenderer spriteRenderer;
+
     public int health = 1;
 
     public float invulnPeriod = 0;
     float invulnTimer = 0;
     int defaultLayer = 0;
-
-    SpriteRenderer spriteRenderer;
-
 
     private void Start()
     {

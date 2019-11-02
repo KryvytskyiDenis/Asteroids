@@ -6,39 +6,57 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public HudController hud;
+
+    public PlayerSpawner playerSpawner;
+
     public TextMeshProUGUI scoreTxt;
     public TextMeshProUGUI gameOverTxt;
     public TextMeshProUGUI restartGameTxt;
     public TextMeshProUGUI healthTxt;
 
     private DamageHandler damageHandler;
-    private PlayerSpawner playerSpawner;
+   
 
     public bool gameOver;
 
     private int score;
-        
+
     private void Start()
     {
+        StartGame();
+    }
+
+    public void StartGame()
+    {
         ResetHud();
+        gameOver = false;
+        hud.ShowHud();
+        playerSpawner.SpawnPlayer();
+    }
+
+    public void ShowMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void Update()
     {
-        if(damageHandler == null)
+        if(damageHandler == null && !gameOver)
         {
             damageHandler = GameObject.FindWithTag("Player").GetComponent<DamageHandler>();
         }
 
-        if (playerSpawner == null)
+        if (gameOver )
         {
-            playerSpawner = GameObject.FindWithTag("Player").GetComponent<PlayerSpawner>();
-        }
-
-        if(gameOver && Input.GetKey(KeyCode.R))
-        {
-            RestartGame();
-            ResetHud();
+            if(Input.GetKey(KeyCode.R))
+            {
+                RestartGame();
+            }
+            else if(Input.GetKey(KeyCode.M))
+            {
+                ShowMenu();
+            }
         }
         else if (damageHandler)
         {
@@ -63,12 +81,13 @@ public class GameManager : MonoBehaviour
     void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        playerSpawner.SpawnPlayer();
     }
 
     void ResetHud()
     {
         score = 0;
+        scoreTxt.text = "Score: " + score;
+
         restartGameTxt.enabled = false;
         gameOverTxt.enabled = false;
         gameOver = false;

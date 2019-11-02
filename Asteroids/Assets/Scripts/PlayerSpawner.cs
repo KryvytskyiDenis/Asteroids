@@ -7,31 +7,25 @@ public class PlayerSpawner : MonoBehaviour
     public GameObject playerPrefab;
     private GameObject playerInstance;
 
-    public int countLives = 4;
-
+    private int health;
     float respawnTimer;
+
     public void SpawnPlayer()
     {
-        countLives--;
         respawnTimer = 2f;
         playerInstance = Instantiate(playerPrefab, transform.position, Quaternion.identity);
+        health = playerInstance.GetComponent<DamageHandler>().health;
         Debug.Log("Player spawned");
-    }
-
-    private void Start()
-    {
-        SpawnPlayer();
     }
 
     private void Update()
     {
-        
+        //RespawnPlayer();
     }
 
-    // Is not used now
     void RespawnPlayer()
     {
-        if (playerInstance == null && countLives > 0)
+        if (playerInstance == null && health > 0)
         {
             respawnTimer -= Time.deltaTime;
 
