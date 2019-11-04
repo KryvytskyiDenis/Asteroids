@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 97474224639651264}
   - component: {fileID: 97474224639651277}
   - component: {fileID: 97474224639651279}
+  - component: {fileID: 2756374355336631302}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -174,6 +175,7 @@ MonoBehaviour:
   rb: {fileID: 97474224639651267}
   thrust: 5
   turnThrust: 300
+  boundariesController: {fileID: 2756374355336631302}
 --- !u!114 &97474224639651277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916f436b53f98bd4493926b4480cfb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   health: 3
   invulnPeriod: 3
 --- !u!114 &97474224639651279
@@ -204,3 +207,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 27822313353607149, guid: 3e6ddd5feb37ec24a985001f684fff1a,
     type: 3}
   fireDelay: 0.1
+--- !u!114 &2756374355336631302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97474224639651271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd61691fc48dea8479d50f94b8dcb545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
