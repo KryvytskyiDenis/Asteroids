@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game over");
         restartGameTxt.enabled = true;
         gameOverTxt.enabled = true;
         gameOver = true;

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4316574480806042450}
   - component: {fileID: 4316574480806042451}
-  - component: {fileID: 4316574480806042448}
   - component: {fileID: 4316574480806042449}
+  - component: {fileID: 4316574480806042448}
   - component: {fileID: 4316574480806042413}
   - component: {fileID: 7865175633979245993}
   m_Layer: 0
@@ -84,29 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4316574480806042448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4316574480806042454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efff3488c1c1eb34aa915eb32ad17291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 4316574480806042449}
-  maxThrust: 45.94
-  maxTorque: 51.57
-  asteroidSize: 3
-  boundariesController: {fileID: 7865175633979245993}
-  medAsteroidPrefab: {fileID: 3455858416938749130, guid: c70dd7f04295c1246b22f3e3abcb990b,
-    type: 3}
-  smallAsteroidPrefab: {fileID: 626822612645912522, guid: 8befe2ae52f6f204caad890926d8affc,
-    type: 3}
-  tinyAsteroidPrefab: {fileID: 4225576132175189161, guid: 4635443e08ef2d447922bab65b6fb90c,
-    type: 3}
 --- !u!50 &4316574480806042449
 Rigidbody2D:
   serializedVersion: 4
@@ -128,6 +105,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4316574480806042448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4316574480806042454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efff3488c1c1eb34aa915eb32ad17291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidPrefabs: {fileID: 0}
+  rb: {fileID: 4316574480806042449}
+  maxThrust: 45.94
+  maxTorque: 51.57
+  asteroidSize: 3
+  boundariesController: {fileID: 7865175633979245993}
 --- !u!58 &4316574480806042413
 CircleCollider2D:
   m_ObjectHideFlags: 0

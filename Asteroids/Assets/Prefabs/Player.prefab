@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 97474224639651267}
-  thrust: 5
+  thrust: 3
   turnThrust: 300
   boundariesController: {fileID: 2756374355336631302}
 --- !u!114 &97474224639651277
@@ -207,6 +207,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 27822313353607149, guid: 3e6ddd5feb37ec24a985001f684fff1a,
     type: 3}
   fireDelay: 0.1
+  boundariesCotroller: {fileID: 2756374355336631302}
 --- !u!114 &2756374355336631302
 MonoBehaviour:
   m_ObjectHideFlags: 0

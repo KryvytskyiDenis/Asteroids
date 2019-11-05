@@ -36,8 +36,6 @@ public class DamageHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger");
-
         health--;
 
         if(invulnPeriod > 0)
@@ -45,12 +43,10 @@ public class DamageHandler : MonoBehaviour
             invulnTimer = invulnPeriod;
             gameObject.layer = 12;
         }
-       
     }
 
     private void Update()
     {
-        
         if(invulnTimer > 0)
         {
             invulnTimer -= Time.deltaTime;
@@ -81,7 +77,6 @@ public class DamageHandler : MonoBehaviour
     {
         if(gameObject.tag.Equals("Enemy"))
         {
-            Debug.Log("Enemy destroyed");
             gameManager.UpdateScore(1);
         }
         else if(gameObject.tag.Equals("Player"))

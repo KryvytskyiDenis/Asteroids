@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8336437942057054202}
   - component: {fileID: 8336437942057054201}
   - component: {fileID: 4414003827758028628}
+  - component: {fileID: -5364371889724206777}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
@@ -160,6 +161,19 @@ MonoBehaviour:
   bulletPrefab: {fileID: 27822313353607149, guid: a8b827222113af44b91e784ab6cf449e,
     type: 3}
   fireDelay: 1
+  boundariesCotroller: {fileID: -5364371889724206777}
+--- !u!114 &-5364371889724206777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8336437942057054207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd61691fc48dea8479d50f94b8dcb545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8336437942777701280
 GameObject:
   m_ObjectHideFlags: 0

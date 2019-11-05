@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
 {
+    public AsteroidPrefabList asteroidPrefabs;
+
     public Rigidbody2D rb;
 
     public float maxThrust;
@@ -13,14 +15,10 @@ public class AsteroidController : MonoBehaviour
     public BoundariesController boundariesController;
     float asteroidBoundariesRadius;
 
-    // Asteroids prefabs
-    public GameObject medAsteroidPrefab;
-    public GameObject smallAsteroidPrefab;
-    public GameObject tinyAsteroidPrefab;
-
     private void Start()
     {
         asteroidBoundariesRadius = GetComponent<Renderer>().bounds.size.x;
+        asteroidPrefabs = GameObject.Find("PrefabsManager").GetComponent<AsteroidPrefabList>();
 
         Vector2 thrust = new Vector2(Random.Range(-maxThrust, maxThrust), Random.Range(-maxThrust, maxThrust));
         float torque = Random.Range(-maxTorque, maxTorque);
@@ -44,25 +42,31 @@ public class AsteroidController : MonoBehaviour
     {
         if(other.CompareTag("Bullet"))
         {
+            int asteroidsCountToGenerate = 2;
 
             switch(asteroidSize)
             {
                 case 3:
-                    Instantiate(medAsteroidPrefab, transform.position, transform.rotation);
-                    Instantiate(medAsteroidPrefab, transform.position, transform.rotation);
+                    InstantiateAsteroidWithPrefab((int)AsteroidPrefabList.AsteroidSize.Medium, asteroidsCountToGenerate);
                     break;
                 case 2:
-                    Instantiate(smallAsteroidPrefab, transform.position, transform.rotation);
-                    Instantiate(smallAsteroidPrefab, transform.position, transform.rotation);
+                    InstantiateAsteroidWithPrefab((int)AsteroidPrefabList.AsteroidSize.Small, asteroidsCountToGenerate);
                     break;
                 case 1:
-                    Instantiate(tinyAsteroidPrefab, transform.position, transform.rotation);
-                    Instantiate(tinyAsteroidPrefab, transform.position, transform.rotation);
+                    InstantiateAsteroidWithPrefab((int)AsteroidPrefabList.AsteroidSize.Tiny, asteroidsCountToGenerate);
                     break;
             }
 
             // Move to objects pool
             Destroy(gameObject);
+        }
+    }
+
+    void InstantiateAsteroidWithPrefab(int index, int count)
+    {
+        for(int i = 0; i < count; i++)
+        {
+            Instantiate(asteroidPrefabs.list[index], transform.position, transform.rotation);
         }
     }
 }

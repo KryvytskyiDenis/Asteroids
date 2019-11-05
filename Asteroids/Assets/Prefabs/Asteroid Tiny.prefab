@@ -96,16 +96,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efff3488c1c1eb34aa915eb32ad17291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  asteroidPrefabs: {fileID: 0}
   rb: {fileID: 4225576132175189167}
   maxThrust: 45.94
   maxTorque: 51.57
   asteroidSize: 0
   boundariesController: {fileID: 4704157232138011396}
-  medAsteroidPrefab: {fileID: 3455858416938749130, guid: c70dd7f04295c1246b22f3e3abcb990b,
-    type: 3}
-  smallAsteroidPrefab: {fileID: 626822612645912522, guid: 8befe2ae52f6f204caad890926d8affc,
-    type: 3}
-  tinyAsteroidPrefab: {fileID: 4225576132175189161}
 --- !u!50 &4225576132175189167
 Rigidbody2D:
   serializedVersion: 4

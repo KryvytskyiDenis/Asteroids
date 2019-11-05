@@ -16,6 +16,8 @@ public class ShipShooting : MonoBehaviour
 
     Transform player;
 
+    public BoundariesController boundariesCotroller;
+
     private void Start()
     {
         bulletLayer = gameObject.layer;
@@ -29,10 +31,8 @@ public class ShipShooting : MonoBehaviour
         if(isPlayer)
         {
             isFire = Input.GetButton("Fire1");
-            //Debug.Log(isFire);
         }
-
-        if(!isPlayer)
+        else
         {
             if (player == null)
             {
@@ -41,18 +41,27 @@ public class ShipShooting : MonoBehaviour
                 if (go != null)
                 {
                     player = go.transform;
+                    isFire = true;
                 }
             }
         }
         
-        if (cooldownTimer <= 0 && ((isPlayer && isFire) || (!isPlayer && player != null && Vector3.Distance(transform.position, player.position) < 7)))
+        if(isFire && cooldownTimer <= 0)
         {
-            cooldownTimer = fireDelay;
+            if(isPlayer || (!isPlayer && player != null))
+            {
+                // Check the boundaries
+                // shoot only if position is on the screen
+                if (boundariesCotroller.IsOnScreen(transform.position))
+                {
+                    cooldownTimer = fireDelay;
 
-            Vector3 offset = transform.rotation * bulletOffset;
+                    Vector3 offset = transform.rotation * bulletOffset;
 
-            GameObject bulletGO = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
-            bulletGO.layer = bulletLayer;
+                    GameObject bulletGO = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
+                    bulletGO.layer = bulletLayer;
+                }
+            }
         }
     }
 }

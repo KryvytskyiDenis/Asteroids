@@ -32,4 +32,26 @@ public class BoundariesController : MonoBehaviour
             newPos.x = widthOrtho;
         }
     }
+
+    public bool IsOnScreen(in Vector2 pos)
+    {
+        bool isOnScreen = false;
+
+        if (pos.y < Camera.main.orthographicSize && pos.y > -Camera.main.orthographicSize)
+        {
+            isOnScreen = true;
+        }
+
+        // Calculate the orthographic width based on the screen ration
+        float screenRation = (float)Screen.width / (float)Screen.height;
+        float widthOrtho = Camera.main.orthographicSize * screenRation;
+
+        // Do horizontal bounds
+        if (pos.x > widthOrtho || pos.x < -widthOrtho)
+        {
+            isOnScreen = false;
+        }
+
+        return isOnScreen;
+    }
 }
