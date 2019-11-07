@@ -34,7 +34,7 @@ public class DamageHandler : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         health--;
 
@@ -84,6 +84,6 @@ public class DamageHandler : MonoBehaviour
             gameManager.GameOver();
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

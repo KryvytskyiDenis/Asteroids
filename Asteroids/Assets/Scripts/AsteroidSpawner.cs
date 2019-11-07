@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidsSpawner : MonoBehaviour
+public class AsteroidSpawner : MonoBehaviour
 {
-    public AsteroidPrefabList asteroidPrefabs;
+    ObjectPooler objectPooler;
+
+    public List<string> asteroidSize;
 
     public float delay = 0.5f;
 
@@ -12,23 +14,27 @@ public class AsteroidsSpawner : MonoBehaviour
     private Vector2 pos;
     private float spawnDistance = 12f;
 
+    private void Start()
+    {
+        objectPooler = ObjectPooler.Instance;
+    }
+
     private void Update()
     {
         timer -= Time.deltaTime;
 
-        if(timer <= 0)
+        if (timer <= 0)
         {
             timer = delay;
 
             // Generate an asteroid with the random size
-            int size =  Random.Range((int)AsteroidPrefabList.AsteroidSize.Tiny, (int)AsteroidPrefabList.AsteroidSize.Big);
+            int sizeIndex = Random.Range(0, asteroidSize.Count);
 
             Vector3 offset = Random.onUnitSphere;
-
             offset.z = 0;
             offset = offset.normalized * spawnDistance;
 
-            Instantiate(asteroidPrefabs.list[size], transform.position + offset, Quaternion.identity);
+            objectPooler.SpawnFromPool(asteroidSize[sizeIndex], transform.position + offset, Quaternion.identity);
         }
     }
 }

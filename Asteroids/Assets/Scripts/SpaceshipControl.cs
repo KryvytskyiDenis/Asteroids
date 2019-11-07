@@ -5,13 +5,15 @@ using UnityEngine;
 public class SpaceshipControl : MonoBehaviour {
 
     public Rigidbody2D rb;
+
     public float thrust;
     public float turnThrust;
+
     private float thrustInput;
     private float turnInput;
 
     public BoundariesController boundariesController;
-    float shipBoundariesRadius = 0.5f;
+    float boundariesRadius = 0.5f;
 
     private void Update()
     {
@@ -22,7 +24,7 @@ public class SpaceshipControl : MonoBehaviour {
         // Wrapper
         Vector2 pos = transform.position;
 
-        boundariesController.CheckBoundaries(pos, out Vector2 newPos, pos, shipBoundariesRadius);
+        boundariesController.CheckBoundaries(pos, out Vector2 newPos, pos, boundariesRadius);
 
         // Update position
         transform.position = newPos;

@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameManager gameManager;
 
-    float spawnDistance = 12f;
+    ObjectPooler objectPooler;
+    public List<string> enemyTag;
 
-    float enemyRate = 5;
-    float nextEnemy = 1;
+    public float spawnDistance = 12f;
+
+    public float timer = 1;
+
+    private float delay = 5;
+
+    private void Start()
+    {
+        objectPooler = ObjectPooler.Instance;
+    }
 
     void Update()
     {
-        if(!GameObject.Find("GameManager").GetComponent<GameManager>().gameOver)
+        if(!gameManager.gameOver)
         {
-            nextEnemy -= Time.deltaTime;
+            timer -= Time.deltaTime;
 
-            if (nextEnemy <= 0)
+            if (timer <= 0)
             {
-                nextEnemy = enemyRate;
-                enemyRate *= 0.9f;
-                if (enemyRate < 2)
-                    enemyRate = 2;
+                timer = delay;
+                delay *= 0.9f;
+                if (delay < 2)
+                    delay = 2;
 
                 Vector3 offset = Random.onUnitSphere;
-
                 offset.z = 0;
                 offset = offset.normalized * spawnDistance;
 
-                Instantiate(enemyPrefab, transform.position + offset, Quaternion.identity);
+                int index = Random.Range(0, enemyTag.Count);
+
+                objectPooler.SpawnFromPool(enemyTag[index], transform.position + offset, Quaternion.identity);
             }
         }
     }

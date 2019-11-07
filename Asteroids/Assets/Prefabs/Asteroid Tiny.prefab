@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4225576132175189164}
   - component: {fileID: 4225576132175189165}
-  - component: {fileID: 4225576132175189166}
   - component: {fileID: 4225576132175189167}
   - component: {fileID: 4225576132175189160}
+  - component: {fileID: 4225576132175189166}
   - component: {fileID: 4704157232138011396}
   m_Layer: 0
   m_Name: Asteroid Tiny
@@ -84,24 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4225576132175189166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4225576132175189161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efff3488c1c1eb34aa915eb32ad17291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  asteroidPrefabs: {fileID: 0}
-  rb: {fileID: 4225576132175189167}
-  maxThrust: 45.94
-  maxTorque: 51.57
-  asteroidSize: 0
-  boundariesController: {fileID: 4704157232138011396}
 --- !u!50 &4225576132175189167
 Rigidbody2D:
   serializedVersion: 4
@@ -139,6 +121,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.07
+--- !u!114 &4225576132175189166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4225576132175189161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efff3488c1c1eb34aa915eb32ad17291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 4225576132175189167}
+  maxThrust: 45.94
+  maxTorque: 51.57
+  sizeIndex: 0
+  boundariesController: {fileID: 4704157232138011396}
 --- !u!114 &4704157232138011396
 MonoBehaviour:
   m_ObjectHideFlags: 0

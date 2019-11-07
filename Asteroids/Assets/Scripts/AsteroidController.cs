@@ -2,24 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidController : MonoBehaviour
+public class AsteroidController : MonoBehaviour, IPooledObject
 {
-    public AsteroidPrefabList asteroidPrefabs;
+    AsteroidSpawner asteroidSpawner;
+    ObjectPooler objectPooler;
 
     public Rigidbody2D rb;
 
     public float maxThrust;
     public float maxTorque;
-    public int asteroidSize; // 3 - big, 2 - medium, 1 - small, 0 - tiny
+    public int sizeIndex; // 3 - big, 2 - medium, 1 - small, 0 - tiny
 
     public BoundariesController boundariesController;
-    float asteroidBoundariesRadius;
+    float boundariesRadius;
 
     private void Start()
     {
-        asteroidBoundariesRadius = GetComponent<Renderer>().bounds.size.x;
-        asteroidPrefabs = GameObject.Find("PrefabsManager").GetComponent<AsteroidPrefabList>();
+        boundariesRadius = GetComponent<Renderer>().bounds.size.x;
+        asteroidSpawner =  GameObject.Find("AsteroidSpawner").GetComponent<AsteroidSpawner>();
+        objectPooler = ObjectPooler.Instance;
+    }
 
+    public void OnObjectSpawn()
+    {
         Vector2 thrust = new Vector2(Random.Range(-maxThrust, maxThrust), Random.Range(-maxThrust, maxThrust));
         float torque = Random.Range(-maxTorque, maxTorque);
 
@@ -32,7 +37,7 @@ public class AsteroidController : MonoBehaviour
         // Wrapper
         Vector2 pos = transform.position;
 
-        boundariesController.CheckBoundaries(pos, out Vector2 newPos, pos, asteroidBoundariesRadius);
+        boundariesController.CheckBoundaries(pos, out Vector2 newPos, pos, boundariesRadius);
 
         // Update position
         transform.position = newPos;
@@ -42,31 +47,23 @@ public class AsteroidController : MonoBehaviour
     {
         if(other.CompareTag("Bullet"))
         {
-            int asteroidsCountToGenerate = 2;
-
-            switch(asteroidSize)
-            {
-                case 3:
-                    InstantiateAsteroidWithPrefab((int)AsteroidPrefabList.AsteroidSize.Medium, asteroidsCountToGenerate);
-                    break;
-                case 2:
-                    InstantiateAsteroidWithPrefab((int)AsteroidPrefabList.AsteroidSize.Small, asteroidsCountToGenerate);
-                    break;
-                case 1:
-                    InstantiateAsteroidWithPrefab((int)AsteroidPrefabList.AsteroidSize.Tiny, asteroidsCountToGenerate);
-                    break;
-            }
+            int count = 2;
 
             // Move to objects pool
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+
+            if (sizeIndex > 0)
+            {
+                InstantiateAsteroid(sizeIndex - 1, count); // generate two smaller than current one
+            }
         }
     }
 
-    void InstantiateAsteroidWithPrefab(int index, int count)
+    void InstantiateAsteroid(int sizeIndex, int count)
     {
         for(int i = 0; i < count; i++)
         {
-            Instantiate(asteroidPrefabs.list[index], transform.position, transform.rotation);
+            objectPooler.SpawnFromPool(asteroidSpawner.asteroidSize[sizeIndex], transform.position, transform.rotation);
         }
     }
 }

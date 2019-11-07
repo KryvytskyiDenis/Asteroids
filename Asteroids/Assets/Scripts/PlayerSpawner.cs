@@ -15,7 +15,6 @@ public class PlayerSpawner : MonoBehaviour
         respawnTimer = 2f;
         playerInstance = Instantiate(playerPrefab, transform.position, Quaternion.identity);
         health = playerInstance.GetComponent<DamageHandler>().health;
-        Debug.Log("Player spawned");
     }
 
     private void Update()

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ShipShooting : MonoBehaviour
 {
+    public ObjectPooler objectPooler;
+
     public Vector3 bulletOffset = new Vector3(0, 0.5f, 0);
-    public GameObject bulletPrefab;
+    public string bulletTag;
+
     int bulletLayer = 0;
 
     public float fireDelay = 0.25f;
     float cooldownTimer = 0;
-
+    
     bool isPlayer = false;
     bool isFire = false;
 
@@ -20,6 +23,8 @@ public class ShipShooting : MonoBehaviour
 
     private void Start()
     {
+        objectPooler = ObjectPooler.Instance;
+
         bulletLayer = gameObject.layer;
         isPlayer = gameObject.tag == "Player";
     }
@@ -58,7 +63,7 @@ public class ShipShooting : MonoBehaviour
 
                     Vector3 offset = transform.rotation * bulletOffset;
 
-                    GameObject bulletGO = Instantiate(bulletPrefab, transform.position + offset, transform.rotation);
+                    GameObject bulletGO = objectPooler.SpawnFromPool(bulletTag, transform.position + offset, transform.rotation);
                     bulletGO.layer = bulletLayer;
                 }
             }
