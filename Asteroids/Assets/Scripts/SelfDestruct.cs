@@ -21,7 +21,6 @@ public class SelfDestruct : MonoBehaviour, IPooledObject
         {
             // Move to object pool
             gameObject.SetActive(false);
-            Debug.Log("Destruct");
         }
     }
 }

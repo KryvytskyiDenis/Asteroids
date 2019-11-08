@@ -5,9 +5,11 @@ using UnityEngine;
 public class DamageHandler : MonoBehaviour
 {
     public GameManager gameManager;
+    public HealthBarController healthBar;
 
     SpriteRenderer spriteRenderer;
 
+    
     public int health = 1;
 
     public float invulnPeriod = 0;
@@ -17,7 +19,7 @@ public class DamageHandler : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
+        healthBar = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
         defaultLayer = gameObject.layer;
 
         // This only get the rendere on the parnet object.
@@ -37,8 +39,9 @@ public class DamageHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         health--;
-
-        if(invulnPeriod > 0)
+        healthBar.DecreaseHealth(health);
+        
+        if (invulnPeriod > 0)
         {
             invulnTimer = invulnPeriod;
             gameObject.layer = 12;
