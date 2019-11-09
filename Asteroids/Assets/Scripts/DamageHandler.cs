@@ -7,25 +7,34 @@ public class DamageHandler : MonoBehaviour
     public GameManager gameManager;
     public HealthBarController healthBar;
 
+    private PlayerParams playerParams;
+
     SpriteRenderer spriteRenderer;
 
-    
-    public int health = 1;
-
     public float invulnPeriod = 0;
+
+    private float health = 1;
+        
     float invulnTimer = 0;
     int defaultLayer = 0;
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        healthBar = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
+        
         defaultLayer = gameObject.layer;
 
         // This only get the rendere on the parnet object.
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        if(gameObject.CompareTag("Player"))
+        {
+            healthBar = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
+            playerParams = GameObject.Find("PlayerSettings").GetComponent<PlayerParams>();
+            health = playerParams.health;
+        }
 
-        if(spriteRenderer == null)
+        if (spriteRenderer == null)
         {
             spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
 
@@ -39,7 +48,13 @@ public class DamageHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         health--;
-        healthBar.DecreaseHealth(health);
+        if(gameObject.CompareTag("Player"))
+        {
+            if(healthBar != null)
+            {
+                healthBar.DecreaseHealth(health);
+            }
+        }
         
         if (invulnPeriod > 0)
         {
@@ -50,7 +65,7 @@ public class DamageHandler : MonoBehaviour
 
     private void Update()
     {
-        if(invulnTimer > 0)
+        if (invulnTimer > 0)
         {
             invulnTimer -= Time.deltaTime;
 
@@ -78,11 +93,14 @@ public class DamageHandler : MonoBehaviour
     }
     void Die()
     {
-        if(gameObject.tag.Equals("Enemy"))
+        if(gameObject.CompareTag("Enemy"))
         {
-            gameManager.UpdateScore(1);
+            if(!gameManager.gameOver)
+            {
+                gameManager.UpdateScore(1);
+            }
         }
-        else if(gameObject.tag.Equals("Player"))
+        else if(gameObject.CompareTag("Player"))
         {
             gameManager.GameOver();
         }

@@ -26,7 +26,7 @@ public class ShipShooting : MonoBehaviour
         objectPooler = ObjectPooler.Instance;
 
         bulletLayer = gameObject.layer;
-        isPlayer = gameObject.tag == "Player";
+        isPlayer = gameObject.CompareTag("Player");
     }
 
     private void Update()

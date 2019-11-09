@@ -13,10 +13,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreTxt;
     public TextMeshProUGUI gameOverTxt;
     public TextMeshProUGUI restartGameTxt;
-    public TextMeshProUGUI healthTxt;
-
-    private DamageHandler damageHandler;
-   
 
     public bool gameOver;
 
@@ -42,12 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(damageHandler == null && !gameOver)
-        {
-            damageHandler = GameObject.FindWithTag("Player").GetComponent<DamageHandler>();
-        }
-
-        if (gameOver )
+        if (gameOver)
         {
             if(Input.GetKey(KeyCode.R))
             {
@@ -57,10 +48,6 @@ public class GameManager : MonoBehaviour
             {
                 ShowMenu();
             }
-        }
-        else if (damageHandler)
-        {
-            healthTxt.text = "Health: " + damageHandler.health.ToString();
         }
     }
 
