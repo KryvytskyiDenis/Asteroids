@@ -7,11 +7,18 @@ public class DamageHandler : MonoBehaviour
     public GameManager gameManager;
     public HealthBarController healthBar;
 
-    private PlayerParams playerParams;
-
-    SpriteRenderer spriteRenderer;
-
     public float invulnPeriod = 0;
+    public bool isShield = false;
+
+    public enum BoosterType
+    {
+        Shield, Health, Star
+    };
+
+    public BoosterType type;
+
+    private PlayerParams playerParams;
+    private SpriteRenderer spriteRenderer;
 
     private float health = 1;
         
@@ -47,19 +54,40 @@ public class DamageHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        health--;
-        if(gameObject.CompareTag("Player"))
+        if(other.CompareTag("Booster"))
         {
-            if(healthBar != null)
+            other.gameObject.SetActive(false);
+
+            switch (type)
             {
-                healthBar.DecreaseHealth(health);
+                case BoosterType.Shield:
+                    {
+                        isShield = true;
+                        PlayerBoosters pb = gameObject.GetComponent<PlayerBoosters>();
+                        if (pb != null)
+                        {
+                            pb.GenerateShield();
+                        }
+                    }
+                    break;
+
             }
         }
-        
-        if (invulnPeriod > 0)
+        else if(!isShield)
         {
-            invulnTimer = invulnPeriod;
-            gameObject.layer = 12;
+            health--;
+            if (gameObject.CompareTag("Player"))
+            {
+                if (healthBar != null)
+                {
+                    healthBar.DecreaseHealth(health);
+                }
+            }
+
+            if (invulnPeriod > 0)
+            {
+                StartInvulnerable(invulnPeriod);
+            }
         }
     }
 
@@ -71,6 +99,7 @@ public class DamageHandler : MonoBehaviour
 
             if (invulnTimer <= 0)
             {
+                isShield = false;
                 gameObject.layer = defaultLayer;
                 if(spriteRenderer != null)
                 {
@@ -79,7 +108,7 @@ public class DamageHandler : MonoBehaviour
             }
             else
             {
-                if (spriteRenderer != null)
+                if (spriteRenderer != null && !isShield)
                 {
                     spriteRenderer.enabled = !spriteRenderer.enabled;
                 }
@@ -106,5 +135,11 @@ public class DamageHandler : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+    }
+
+    public void StartInvulnerable(float invulnPeriod)
+    {
+        invulnTimer = invulnPeriod;
+        gameObject.layer = 12;
     }
 }

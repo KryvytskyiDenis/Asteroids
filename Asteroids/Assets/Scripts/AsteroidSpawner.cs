@@ -11,7 +11,6 @@ public class AsteroidSpawner : MonoBehaviour
     public float delay = 0.5f;
 
     private float timer;
-    private Vector2 pos;
     private float spawnDistance = 12f;
 
     private void Start()

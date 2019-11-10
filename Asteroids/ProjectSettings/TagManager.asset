@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Booster_shield
+  - Booster
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Player
   - Enemy
   - Invulnerable
-  - 
+  - Booster
   - 
   - 
   - 
