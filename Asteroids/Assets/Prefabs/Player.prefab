@@ -352,6 +352,8 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   healthBar: {fileID: 0}
   invulnPeriod: 3
+  isShield: 0
+  type: 0
 --- !u!114 &97474224639651279
 MonoBehaviour:
   m_ObjectHideFlags: 0
